@@ -4,64 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Snow Globe</title>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-
 
     <style>
         body { 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: 'Lobster', sans-serif;
-    position: relative; /* To position the pseudo-element correctly */
-    overflow: hidden;
-}
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Lobster', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding: 20px; /* Add padding for better spacing on small screens */
+        }
 
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://i.pinimg.com/1200x/ec/e4/0b/ece40b84cccca6434d81477de1c27b85.jpg');
-    background-size: cover; /* Cover ensures the image fills the viewport */
-    /* filter: blur(2px); Apply the blur effect */
-    z-index: -1; /* Ensure the blur is behind the content */
-}
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.pinimg.com/1200x/ec/e4/0b/ece40b84cccca6434d81477de1c27b85.jpg');
+            background-size: cover;
+            z-index: -1;
+        }
 
-.container {
-    position: relative; /* Make sure content stays on top */
-    z-index: 1; /* Keep content above the background */
-}
-
-.container {
-    margin-left: 600px; /* Move both the globe and button to the right */
-    text-align: center; /* Keep button centered with respect to the globe */
-}
-
-.container label,
-.container select,
-.container .snow-globe,
-.container button,
-.container .instructions {
-    margin-bottom: 30px; /* Add space between each element */
-}
+        .container {
+            margin: 0;
+            text-align: center;
+        }
 
         .snow-globe {
-            width: 400px;
-            height: 400px;
+            width: 80%;
+            height: auto;
+            max-width: 300px;
+            max-height: 300px;
             border: 10px solid black;
             border-radius: 50%;
             background: radial-gradient(circle, #fff, #ddeef7);
             overflow: hidden;
             position: relative;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-            margin: 0 auto 20px 20px;
+            margin: 20px auto;
         }
 
         .snow {
@@ -69,7 +56,7 @@ body::before {
             width: 200%;
             height: 200%;
             justify-content: center;
-            background-image:  url('https://i.pinimg.com/736x/4e/42/a8/4e42a83e8efeb54200d0da89db574037.jpg');
+            background-image: url('https://i.pinimg.com/736x/4e/42/a8/4e42a83e8efeb54200d0da89db574037.jpg');
             background-size: contain;
             filter: blur(2px);
             animation: snow-fall 0s linear infinite;
@@ -85,19 +72,18 @@ body::before {
         }
 
         .name {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Dancing Script', bold; /* Apply the festive font */
-    font-size: 50px; /* Adjust font size as needed */
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.5s;
-    color: black; /* Set the text color to red */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for a more festive look */
-}
-
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Dancing Script', bold;
+            font-size: 50px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+            color: black;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
 
         .name.revealed {
             opacity: 1;
@@ -112,7 +98,6 @@ body::before {
             font-size: 16px;
             cursor: pointer;
             transition: background 0.3s;
-            font-family: 'Lobster', sans-serif;
         }
 
         button:hover {
@@ -130,7 +115,6 @@ body::before {
             margin-top: 20px;
         }
 
-        /* Modal Background */
         .modal {
             display: none;
             position: fixed;
@@ -143,18 +127,16 @@ body::before {
             animation: fadeIn 0.5s;
         }
 
-        /* Modal Content */
         .modal-content {
             background-color: #fff;
             margin: 15% auto;
             padding: 30px;
             border: 1px solid #888;
-            width: 80%;
+            width: 90%;
             text-align: center;
             border-radius: 10px;
         }
 
-        /* Close Button */
         .close-btn {
             color: #aaa;
             float: right;
@@ -168,7 +150,6 @@ body::before {
             color: black;
         }
 
-        /* Fade-in animation */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -177,103 +158,119 @@ body::before {
                 opacity: 1;
             }
         }
+
+        @media (max-width: 768px) {
+            .snow-globe {
+                width: 90%;
+                max-width: 250px;
+            }
+
+            button {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .instructions {
+                font-size: 14px;
+            }
+
+            .name {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .snow-globe {
+                width: 80%;
+                max-width: 200px;
+            }
+
+            button {
+                font-size: 10px;
+                padding: 6px;
+            }
+
+            .instructions {
+                font-size: 12px;
+            }
+
+            .name {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <label for="user-name">Select Your Name:</label>
         <select id="user-name">
-			<option value="Chinnu">Chinnu</option>
+            <option value="Chinnu">Chinnu</option>
             <option value="Jyothi">Jyothi</option>
-            <option value="Preethi">Preethi</option>  
+            <option value="Preethi">Preethi</option>
         </select>
-
 
         <div class="snow-globe">
             <div class="snow"></div>
             <div class="name hidden">🍬🦌 Secret Santa 🦌🍬</div>
         </div>
 
-
-
         <button id="reveal-btn">Shake the Globe</button>
         <p class="instructions">Shake the globe to reveal your Secret Santa!</p>
     </div>
 
-    <!-- Modal -->
-<div id="elf-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h2>Hey, <span id="modal-name">[Name]</span> is your elf, gift me the best! 🦌🍬</h2>
+    <div id="elf-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Hey, <span id="modal-name">[Name]</span> is your elf, gift me the best! 🦌🍬</h2>
+        </div>
     </div>
-</div>
-
 
     <script>
-const names = ["Jyothi", "Chinnu", "Preethi"];
-const globe = document.querySelector('.snow-globe');
-const nameDiv = document.querySelector('.name');
-const revealBtn = document.getElementById('reveal-btn');
-const elfModal = document.getElementById('elf-modal');
-const modalName = document.getElementById('modal-name');  // Get the placeholder for the name
-const closeBtn = document.querySelector('.close-btn');
+        const names = ["Jyothi", "Chinnu", "Preethi"];
+        const globe = document.querySelector('.snow-globe');
+        const nameDiv = document.querySelector('.name');
+        const revealBtn = document.getElementById('reveal-btn');
+        const elfModal = document.getElementById('elf-modal');
+        const modalName = document.getElementById('modal-name');
+        const closeBtn = document.querySelector('.close-btn');
 
-// To track names that have already been selected
-let selectedNames = [];
+        let selectedNames = [];
 
-function pickRandomName() {
-    // Filter out names that have already been selected
-    const availableNames = names.filter(name => !selectedNames.includes(name));
+        function pickRandomName() {
+            const availableNames = names.filter(name => !selectedNames.includes(name));
+            if (availableNames.length === 0) {
+                alert("All names have been selected!");
+                revealBtn.disabled = true;
+                revealBtn.textContent = 'No More Names Left';
+                return null;
+            }
 
-    if (availableNames.length === 0) {
-        alert("All names have been selected!");
-        revealBtn.disabled = true; // Disable the button once all names have been chosen
-        revealBtn.textContent = 'No More Names Left';
-        return null; // Return null to indicate no name left
-    }
+            const randomName = availableNames[Math.floor(Math.random() * availableNames.length)];
+            selectedNames.push(randomName);
+            nameDiv.textContent = `🦌 ${randomName} 🦌`;
+            nameDiv.classList.add('revealed');
+            return randomName;
+        }
 
-    // Pick a random name from the remaining available names
-    const randomName = availableNames[Math.floor(Math.random() * availableNames.length)];
+        revealBtn.addEventListener('click', () => {
+            nameDiv.classList.remove('revealed');
+            setTimeout(() => {
+                const pickedName = pickRandomName();
+                if (!pickedName) return;
+                modalName.textContent = pickedName;
+                elfModal.style.display = 'block';
+            }, 500);
+        });
 
-    // Add the selected name to the selectedNames array
-    selectedNames.push(randomName);
+        closeBtn.addEventListener('click', () => {
+            elfModal.style.display = 'none';
+        });
 
-    // Display the picked name
-    nameDiv.textContent = `🦌 ${randomName} 🦌`;
-    nameDiv.classList.add('revealed');
-
-    return randomName; // Return the picked name
-}
-
-// Show the modal with the picked name
-revealBtn.addEventListener('click', () => {
-    nameDiv.classList.remove('revealed');
-    setTimeout(() => {
-        const pickedName = pickRandomName();  // Pick a random name and store it
-        if (!pickedName) return; // If no name is picked (all names selected)
-
-        // Insert the picked name into the modal
-        modalName.textContent = pickedName;
-
-        // Show the modal
-        elfModal.style.display = 'block';
-    }, 500);
-});
-
-// Close the modal when the user clicks the 'X'
-closeBtn.addEventListener('click', () => {
-    elfModal.style.display = 'none'; // Hide the modal
-});
-
-// Close the modal if the user clicks outside of the modal content
-window.addEventListener('click', (event) => {
-    if (event.target === elfModal) {
-        elfModal.style.display = 'none';
-    }
-});
-
-
-
+        window.addEventListener('click', (event) => {
+            if (event.target === elfModal) {
+                elfModal.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
